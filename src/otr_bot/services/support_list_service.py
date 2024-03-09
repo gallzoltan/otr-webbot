@@ -3,6 +3,7 @@ import unidecode
 from enum import Enum
 from otr_bot.models import SupportSearchTable
 from selenium.webdriver.common.by import By
+from typing import List
 
 class FillSupportList(Enum):
   INPUT_KID = "//input[@id='konstrukcio_azonosito']"
@@ -59,7 +60,7 @@ class SupportListService:
       return True
     return False
   
-  def _getClickId(self, rows, council, status):
+  def _getClickId(self, rows: List[SupportSearchTable], council: str, status: str):
     for row in rows:
       council_accentless = unidecode.unidecode(council.lower()).split(' ')
       claimname_accentlesses = unidecode.unidecode(row.claim_name.lower()).split(' ')
