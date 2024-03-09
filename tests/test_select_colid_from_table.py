@@ -1,9 +1,12 @@
-import otr_bot as bot
+import pytest
+from otr_bot.services.support_list_service import SupportListService
 from otr_bot.models.search_table import SupportSearchTable
 
-def test_get_cell_id():
-    browser = None
-    service = bot.services.SupportListService(browser)
+@pytest.fixture
+def service():
+    return SupportListService(browser=None)
+
+def test_get_cell_id(service):
     collist = [
         {"id": "0", "title": "title"},
         {"id": "1", "title": "support_name"},
