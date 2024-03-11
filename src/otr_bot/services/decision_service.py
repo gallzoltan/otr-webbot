@@ -70,7 +70,7 @@ class ConstantDecision(Enum):
   )
 
 
-class DecissionService:
+class DecisionService:
   def __init__(self, browser):
     self._browser = browser
     self._const = ConstantDecision
@@ -108,27 +108,6 @@ class DecissionService:
       self._browser.selectOption(By.XPATH, self._const.SELECT_DECISION_FORMAT.value[i], master.form)
       self._browser.selectOption(By.XPATH, self._const.SELECT_DECISION_REGIO.value[i], address.region)
       self._browser.sendKeys(By.XPATH, self._const.INPUT_DECISION_AMOUNT.value[i], amount.claim_sum_content)
-
-    # if(';' in decision_categories.sup_categories): 
-    #   cat_list = [ x.strip() for x in decision_categories.sup_categories.split(";") if x.strip() ]
-    #   for i, cats in enumerate(cat_list):
-    #     self.clickElement(By.XPATH, self._const.BUTTON_CATEGORY_NEW)
-    #     self.clickElement(By.XPATH, self._const.SEARCH_DECISION_OPEN_SUB[i])
-    #     cat_tuple = self.__split_by_dots(cats)
-    #     for index, c in enumerate(cat_tuple):         
-    #       self.selectOption(By.XPATH, self._const.SEARCH_DECISION_INPUT_SUB[index], Category.CAT_TITLES[c])
-    #     self.clickElement(By.XPATH, self._const.SEARCH_DECISION_COLSE)
-    #     self.selectOption(By.XPATH, self._const.SELECT_DECISION_FORMAT_SUB[i], decision_categories.sup_form)
-    #     self.selectOption(By.XPATH, self._const.SELECT_DECISION_REGIO_SUB[i], decision_categories.sup_regio)
-    #     self.sendKeys(By.XPATH, self._const.INPUT_DECISION_AMOUNT_SUB[i], decision_categories.sup_support)                
-    # else:
-    #   self.clickElement(By.XPATH, self._const.BUTTON_CATEGORY_NEW)
-    #   self.clickElement(By.XPATH, self._const.SEARCH_DECISION_OPEN)
-    #   self.selectOption(By.XPATH, self._const.SEARCH_DECISION_INPUT, decision_categories.sup_categories)
-    #   self.clickElement(By.XPATH, self._const.SEARCH_DECISION_COLSE)
-    #   self.selectOption(By.XPATH, self._const.SELECT_DECISION_FORMAT, decision_categories.sup_form)
-    #   self.selectOption(By.XPATH, self._const.SELECT_DECISION_REGIO, decision_categories.sup_regio)
-    #   self.sendKeys(By.XPATH, self._const.INPUT_DECISION_AMOUNT, decision_categories.sup_support)
   
   def _split_by_dots(self, s):
     res = []

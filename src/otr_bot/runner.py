@@ -67,7 +67,7 @@ class ModuleRunner:
       if(found):
         time.sleep(2)
         self._navigateTab(main_tab=Navigate.TAB_MAIN_DECISION.value)
-        with self._bot.services.DecissionService(self.browser) as decision:
+        with self._bot.services.DecisionService(self.browser) as decision:
           decision.fillDecisionBasicTab(deadline=deadline, amount=amount)
           self._navigateTab(main_tab=Navigate.TAB_MAIN_DECISION.value, sub_tab=Navigate.TAB_SUB_DECISION.value, index=1)
           decision.fillDecisionTab()
