@@ -25,12 +25,12 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [
-"pandas",
-"openpyxl",
-"python_dotenv",
-"selenium",
-"unidecode",
-"argparse",
+  "pandas",
+  "openpyxl",
+  "python_dotenv",
+  "selenium",
+  "unidecode",
+  "argparse",
 ]
 
 [project.urls]
