@@ -124,12 +124,12 @@ class SubmissionService:
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_DATE.value, deadline.claim_submission_date)
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_SUMMARY.value, denomination.claim_summary)
     # # Közigazgatási és Területfejlesztési Minisztérium (2023.12.31-ig BMÖÁ) (09)
-    self._browser.selectOption(By.XPATH, ConstantSubmission.SELECT_CLAIM_SUPPORTER.value, self.SUPPORTER_KTM) 
+    self._browser.selectOption(By.XPATH, ConstantSubmission.SELECT_CLAIM_SUPPORTER.value, ConstantSubmission.SUPPORTER_BM.value) 
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_AMOUNT.value, amount.claim_sum)
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_GOAL.value, denomination.claim_goal)
   
   def fillClaimPlaceOfUseTab(self, address: Address):
-    if(self._browser.is_checked(self.CHECKBOX_CLAIM_COUNTRY_ID.value)):
+    if(self._browser.is_checked(ConstantSubmission.CHECKBOX_CLAIM_COUNTRY_ID.value)):
       self._browser.clickElement(By.XPATH, ConstantSubmission.CHECKBOX_CLAIM_COUNTRY.value)        
     self._browser.clickElement(By.XPATH, ConstantSubmission.CHECKBOX_CLAIM_PLACE.value)
     self._browser.clickElement(By.XPATH, ConstantSubmission.BUTTON_CLAIM_PLACE_NEW.value)
