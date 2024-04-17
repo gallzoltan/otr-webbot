@@ -75,14 +75,15 @@ parallel = true
 omit = [
   "src/otr_bot/__about__.py",
 ]
-
 [tool.coverage.paths]
 otr_bot = ["src/otr_bot", "*/otr-bot/src/otr_bot"]
 tests = ["tests", "*/otr-bot/tests"]
-
 [tool.coverage.report]
 exclude_lines = [
   "no cov",
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/otr_bot"]
