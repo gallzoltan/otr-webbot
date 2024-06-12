@@ -85,5 +85,12 @@ exclude_lines = [
   "if TYPE_CHECKING:",
 ]
 
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/docs",
+  "/scripts",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/otr_bot"]
