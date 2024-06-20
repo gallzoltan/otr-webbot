@@ -7,8 +7,12 @@ from otr_bot.models import Master, Denomination, Deadline, Amount, Address
 
 class ConstantSubmission(Enum):
   CHECKBOX_CLAIM_COUNTRY_ID = "felhasznalasHelyszinek.orszagosFejlesztes"
-  SUPPORTER_BM = "Belügyminisztérium Önkormányzati Államtitkárság (09)"
-  SUPPORTER_KTM = "Közigazgatási és Területfejlesztési Minisztérium (09)"
+  # SUPPORTER_BM = "Belügyminisztérium Önkormányzati Államtitkárság (09)"
+  # SUPPORTER_KTM = "Közigazgatási és Területfejlesztési Minisztérium (2023.12.31-ig BMÖÁ) (09)"
+  SUPPORTER = {
+    "BM": "Belügyminisztérium Önkormányzati Államtitkárság (09)",
+    "KTM": "Közigazgatási és Területfejlesztési Minisztérium (2023.12.31-ig BMÖÁ) (09)"
+  }
 
   ''' Basic data TAB '''
   RADIO_CLASSIFICATIONS = (    
@@ -111,7 +115,7 @@ class SubmissionService:
     self._browser.clickElement(By.XPATH, ConstantSubmission.POPUP_GRID_CLICK.value)
     self._browser.clickElement(By.XPATH, ConstantSubmission.POPUP_BUTTON_SELECT.value) 
   
-  def fillClaimBasicTab(self, master: Master, denomination: Denomination, deadline: Deadline, amount: Amount):
+  def fillClaimBasicTab(self, supporter:str, master: Master, denomination: Denomination, deadline: Deadline, amount: Amount):    
     self._browser.clickElement(By.XPATH, ConstantSubmission.SEARCH_FOR_KID.value)
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_KID.value, master.kid)
     self._browser.clickElement(By.XPATH, ConstantSubmission.BUTTON_SERACH_KID.value)
@@ -123,8 +127,8 @@ class SubmissionService:
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_NAME.value, denomination.claim_name)
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_DATE.value, deadline.claim_submission_date)
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_SUMMARY.value, denomination.claim_summary)
-    # # Közigazgatási és Területfejlesztési Minisztérium (2023.12.31-ig BMÖÁ) (09)
-    self._browser.selectOption(By.XPATH, ConstantSubmission.SELECT_CLAIM_SUPPORTER.value, ConstantSubmission.SUPPORTER_BM.value) 
+    # self._browser.selectOption(By.XPATH, ConstantSubmission.SELECT_CLAIM_SUPPORTER.value, ConstantSubmission.SUPPORTER_BM.value if supporter == 'BM' else ConstantSubmission.SUPPORTER_KTM.value)     
+    self._browser.selectOption(By.XPATH, ConstantSubmission.SELECT_CLAIM_SUPPORTER.value, ConstantSubmission.SUPPORTER.value[supporter]) 
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_AMOUNT.value, amount.claim_sum)
     self._browser.sendKeys(By.XPATH, ConstantSubmission.INPUT_CLAIM_GOAL.value, denomination.claim_goal)
   

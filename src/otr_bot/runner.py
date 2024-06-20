@@ -5,9 +5,10 @@ from .constants import Navigate, SubmitForms
 from selenium.webdriver.common.by import By
 
 class ModuleRunner:  
-  def __init__(self):
+  def __init__(self, supporter: str):
     self._bot = bot
     self._logger = logging.getLogger()
+    self._supporter = supporter
     self._rounds = {
       1: self._run_round1,
       2: self._run_round2,
@@ -43,7 +44,7 @@ class ModuleRunner:
         submission.fillClaimingBasicTab(master=master)      
         self._navigateTab(main_tab=Navigate.TAB_MAIN_CLAIM.value)
         self._navigateTab(main_tab=Navigate.TAB_MAIN_CLAIM.value, sub_tab=Navigate.TAB_SUB_CLAIM.value, index=0)
-        submission.fillClaimBasicTab(master=master, denomination=denomination, deadline=deadline, amount=amount)
+        submission.fillClaimBasicTab(supporter=self._supporter, master=master, denomination=denomination, deadline=deadline, amount=amount)
         self._navigateTab(main_tab=Navigate.TAB_MAIN_CLAIM.value, sub_tab=Navigate.TAB_SUB_CLAIM.value, index=1) 
         submission.fillClaimPlaceOfUseTab(address=address)
         self._navigateTab(main_tab=Navigate.TAB_MAIN_CLAIM.value, sub_tab=Navigate.TAB_SUB_CLAIM.value, index=2)

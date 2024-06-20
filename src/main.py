@@ -36,9 +36,12 @@ def get_env_vars(env):
 
 def main():
   parser = argparse.ArgumentParser()
-  parser.add_argument('-s', '--status', type=str, required=True, help="A betöltés státusza (Benyújtás, Döntés, Szerződés, Lezárás)") 
+  parser.add_argument('-s', '--status', type=str, required=True, help="A betöltés státusza [Benyújtás, Döntés, Szerződés, Lezárás]") 
   parser.add_argument('-f', '--file', type=str, required=True, help="A betöltő fájl (*.xlsx)")
+  parser.add_argument('-sp', '--supporter', type=str, required=True, help="Támogató [BM, KTM]")
   parser.add_argument('-b', '--begin', type=int, required=False, help="Kezdő sor (4)")
+  parser.add_argument('-e', '--end', type=int, required=False, help="Vég sor (0)")
+  
   args = parser.parse_args()
 
   logging.logger.info(f"Start script with: {args.status} status and {args.file} file")
@@ -59,7 +62,7 @@ def main():
     logging.logger.error(f"Invalid status: {args.status}")
     return
 
-  runner = ModuleRunner()
+  runner = ModuleRunner(supporter=args.supporter)
   runner.load_datas(excel_file_path=args.file, sheet_name='betolt') \
     .start_driver(options=get_driver_options(), system=system, headless=False) \
     .login_otr(url=url, username=username, password=password) \
