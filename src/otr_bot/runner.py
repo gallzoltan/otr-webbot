@@ -74,14 +74,14 @@ class ModuleRunner:
           decision.fillDecisionTab()
           self._navigateTab(main_tab=Navigate.TAB_MAIN_DECISION.value, sub_tab=Navigate.TAB_SUB_DECISION.value, index=3)
           decision.fillDecisionCategoryTab(master=master, address=address, amount=amount)
-        if(self._validForm()):
-          self._logger.debug("Valid form")
-          if(self._fixingForm("DontesKesz")):
-            self._logger.debug(f"Rögzítés kész: {address.city}")
-          else:
-            self._logger.error(f"Rögzítés hiba id:{master.rowid} city:{address.city}")
+        # if(self._validForm()):
+        #   self._logger.debug("Valid form")
+        if(self._fixingForm("DontesKesz")):
+          self._logger.debug(f"Rögzítés kész: {address.city}")
         else:
-          self._logger.error(f"Ellenőrzés hiba. id:{master.rowid} city:{address.city}")
+          self._logger.error(f"Rögzítés hiba id:{master.rowid} city:{address.city}")
+        # else:
+        #   self._logger.error(f"Ellenőrzés hiba. id:{master.rowid} city:{address.city}")
       else:
         self._logger.error(f"{address.city} nevű önkormányzat nem található!")      
 
