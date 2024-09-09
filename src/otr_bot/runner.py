@@ -99,14 +99,14 @@ class ModuleRunner:
         with self._bot.services.ContractService(self.browser) as contract:
           contract.fillContractBasicTab(deadline=deadline)
           self._navigateTab(main_tab=Navigate.TAB_MAIN_CONTRACT.value, sub_tab=Navigate.TAB_SUB_CONTRACT.value, index=2)
-        if(self._validForm()):
-          self._logger.debug("Valid form")
-          if(self._fixingForm("SzerzodesKesz")):
-            self._logger.debug(f"Rögzítés kész: {address.city}")
-          else:
-            self._logger.error(f"Rögzítés hiba id:{master.rowid} city:{address.city}")
+        # if(self._validForm()):
+        #   self._logger.debug("Valid form")
+        if(self._fixingForm("SzerzodesKesz")):
+          self._logger.debug(f"Rögzítés kész: {address.city}")
         else:
-          self._logger.error(f"Ellenőrzés hiba. id:{master.rowid} city:{address.city}")
+          self._logger.error(f"Rögzítés hiba id:{master.rowid} city:{address.city}")
+        # else:
+        #   self._logger.error(f"Ellenőrzés hiba. id:{master.rowid} city:{address.city}")
       else:
         self._logger.error(f"{address.city} nevű önkormányzat nem található!")
 
